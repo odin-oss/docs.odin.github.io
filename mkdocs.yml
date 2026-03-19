@@ -1,7 +1,10 @@
 site_name: Odin Documentation
 site_url: https://odin.github.io/
+repo_url: https://github.com/odin-oss/monolith-api
+repo_name: GitHub
+
 theme:
-  name: cinder
+  name: material
 
 nav:
   - Home: index.md
