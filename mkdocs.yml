@@ -8,6 +8,8 @@ repo_name: GitHub
 
 theme:
   name: material
+  logo: images/logo.png
+  favicon: images/favicon.ico
 
 nav:
   - Home: index.md
