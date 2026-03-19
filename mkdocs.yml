@@ -28,7 +28,7 @@ theme:
         icon: material/brightness-4
         name: Switch to light mode
 
-copyright: Copyright &copy; 2026 [Benoit LEFEBVRE](mailto:benlef99@gmail.com) & the previous contributors.
+copyright: 'Copyright &copy; 2026 <a href="mailto:benlef99@gmail.com">Benoit LEFEBVRE</a> & the previous contributors.'
 
 nav:
   - Home: index.md
