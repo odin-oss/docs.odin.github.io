@@ -1,5 +1,8 @@
 site_name: Odin Documentation
-site_url: https://odin.github.io/
+site_url: https://getodin.cloud
+site_description: Odin official documentation.
+site_author: Benoit LEFEBVRE
+
 repo_url: https://github.com/odin-oss/monolith-api
 repo_name: GitHub
 
