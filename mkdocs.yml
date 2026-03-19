@@ -1,4 +1,5 @@
 site_name: Odin Documentation
+site_url: https://odin.github.io/
 theme:
   name: cinder
 
