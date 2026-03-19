@@ -6,3 +6,4 @@ theme:
 nav:
   - Home: index.md
   - Getting Started: presentation/index.md
+  - Tutorials: tutorials/index.md
