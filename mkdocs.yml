@@ -10,6 +10,23 @@ theme:
   name: material
   logo: images/logo.png
   favicon: images/favicon.ico
+  palette: 
+    # Light/Dark mode toggle (optional but recommended)
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: light green  # This changes the header color
+      accent: light green   # This changes the color of links/buttons
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+        
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: light green
+      accent: light green
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
 
 nav:
   - Home: index.md
