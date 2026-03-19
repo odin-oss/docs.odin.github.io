@@ -1,6 +1,6 @@
-site_name: My Project Docs
+site_name: Odin Documentation
 theme:
-  name: material
+  name: cinder
 
 nav:
   - Home: index.md
