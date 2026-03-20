@@ -35,4 +35,6 @@ nav:
   - Getting Started: presentation/index.md
   - Tutorials:
     - 1. How to set up my development environment: tutorials/1.how-to-set-up-my-development-environment.md
+    - Environment:
+      - How to deploy my own environment: tutorials/how-to-deploy-my-own-environment.md
   - Contributors: contributors/index.md
