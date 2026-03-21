@@ -7,11 +7,11 @@ That is why it was really designed in order to be easy for teacher and student t
 
 There are three current types of profile :
 
-- `ADMINISTRATEUR` : this is for the team that manages the whole application. It has all the permissions and rights on it.
+- `ADMINISTRATOR` : this is for the team that manages the whole application. It has all the permissions and rights on it.
 
-- `PROFESSEUR`: this one is for teachers. It gives them the right to have application and manages sessions of applications.
+- `TEACHER`: this one is for teachers. It gives them the right to have application and manages sessions of applications.
 
-- `ETUDIANT` : this is the RO profile. It can only uses applications that have been added to its profile.
+- `STUDENT` : this is the RO profile. It can only uses applications that have been added to its profile.
 
 ## 1. Terms
 
