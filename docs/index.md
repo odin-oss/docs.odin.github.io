@@ -9,3 +9,5 @@ However, right now the code is yours. 💚
 
 ![Let's Free Odin](images/freeodin.png)
 
+If you need any help, or issue to report, feel free to set an issue : [Monolith API](https://github.com/odin-oss/monolith-api/issues)
+
