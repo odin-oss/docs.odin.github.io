@@ -1,19 +1,21 @@
 # Tutorials
 
-## Deployment and development
+## Mothership 🛸
 
-[1. How to set up my development environment ?](1.how-to-set-up-my-development-environment.md)
+The mothership is the main application of Odin. It can be easily deployed and act as a API hub for administration and for satellites to reach informations.
 
-## Datacenters
+[How to set up my development environment ?](how-to-build-my-own-environment.md)
 
-The monolith API is made to be able to work with multiple datacenters in order to get easy multi-cloud deployment of its application.
+## Satellites 🛰️
 
-So from here, you will find all the documentations to add a new datacenter into Odin.
+The monolith API is made to be able to work with multiple satellites in order to get easy multi-cloud deployment of its application.
+Each one of the satellites is a small agent that will work in a distant cluster.
 
-- [How to create a kubernetes dc ?](datacenter/how-to-create-a-kubernetes-dc.md)
-- [How to create a docker dc ? (tbd)](datacenter/how-to-create-a-docker-dc.md)
+So from here, you will find all the documentations to add a new satellite into Odin's mothership.
 
-## Environment and applications
+- [How to add a Kubernetes cluster (K-Agent) ?](satellites/how-to-add-a-kubernetes-cluster.md)
+
+## Environments 🗂️
 
 The API brings a way for you to create your own custom `environments` that are going to be available for users in compatible datacenter.
 
@@ -21,4 +23,4 @@ The API brings a way for you to create your own custom `environments` that are g
 
 If your interfaces are available in containers, you will be able to deploy them following this documentation.
 
-- [How to deploy my own environment ? (container)](environment/how-to-deploy-my-own-environment.md)
+- [How to build my own environment ? (container)](environments/how-to-build-my-own-environment.md)

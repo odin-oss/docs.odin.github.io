@@ -1,4 +1,4 @@
-# How to deploy my own environment ? (container)
+# How to build my own environment ? (container)
 
 If you want your users to use a custom environment of your own, here a step-by-step guide to this.
 The first version is container only, but dedicated VM guide will be added to the Odin core later in the year.
