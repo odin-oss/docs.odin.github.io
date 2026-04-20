@@ -17,7 +17,10 @@ The deployment is done in two steps :
 
 In the first launch, **do not set** the `AGENT_UUID` variable but set the proper `MOTHERSHIP_URL` & `AGENT_LABEL`.
 
+The agent will reach the `/agent/register` to register himself in the mothership.
+
 ### 2. Launch the agent
 
 Now that you have the UUID, you can set the `AGENT_UUID` / `MOTHERSHIP_URL` and launch the agent again. It will now trigger the every 5 sec to tell its status and get the wanted applications state.
 
+From now on, it will reach the `/agent/up` to get the wanted state of deployments. It also gives its own state (and applications states).
