@@ -24,3 +24,19 @@ The agent will reach the `/agent/register` to register himself in the mothership
 Now that you have the UUID, you can set the `AGENT_UUID` / `MOTHERSHIP_URL` and launch the agent again. It will now trigger the every 5 sec to tell its status and get the wanted applications state.
 
 From now on, it will reach the `/agent/up` to get the wanted state of deployments. It also gives its own state (and applications states).
+
+### 3. Attribution to datacenter
+
+In order to the agent to work, you'll need to attribute it to a new Datacenter.
+
+So you should execute this command : 
+```
+read -p 'MOTHERSHIP_URL : ' MOTHERSHIP_URL
+read -p 'DATACENTER_ID : ' DATACENTER_ID
+read -p 'AGENT_UUID : ' AGENT_UUID
+read -p 'USER_TOKEN : ' USER_TOKEN
+
+curl --request POST \
+  --url https://$MOTHERSHIP_URL/datacenter/$DATACENTER_ID/agent/$AGENT_UUID \
+  --header 'Authorization: Bearer $USER_TOKEN' 
+```
