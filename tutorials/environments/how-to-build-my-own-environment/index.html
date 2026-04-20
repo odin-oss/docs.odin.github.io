@@ -1,0 +1,1199 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Odin official documentation.">
+      
+      
+        <meta name="author" content="Benoit LEFEBVRE">
+      
+      
+        <link rel="canonical" href="https://getodin.cloud/tutorials/environments/how-to-build-my-own-environment/">
+      
+      
+        <link rel="prev" href="../../satellites/how-to-add-a-kubernetes-cluster/">
+      
+      
+        <link rel="next" href="../../../contributors/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>How to build my own environment ? (container) - Odin Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="light-green" data-md-color-accent="light-green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#how-to-build-my-own-environment-container" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Odin Documentation" class="md-header__button md-logo" aria-label="Odin Documentation" data-md-component="logo">
+      
+  <img src="../../../images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Odin Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              How to build my own environment ? (container)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="light-green" data-md-color-accent="light-green"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="light-green" data-md-color-accent="light-green"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/odin-oss/monolith-api" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Odin Documentation" class="md-nav__button md-logo" aria-label="Odin Documentation" data-md-component="logo">
+      
+  <img src="../../../images/logo.png" alt="logo">
+
+    </a>
+    Odin Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/odin-oss/monolith-api" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../presentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mothership 🛸
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Mothership 🛸
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mothership/how-to-set-up-my-development-environment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to set up my development environment ?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Satellites 🛰️
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Satellites 🛰️
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../satellites/how-to-add-a-kubernetes-cluster/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to add a Kubernetes cluster (K-Agent) ?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Environments 🗂️
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Environments 🗂️
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to build my own environment ? (container)
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to build my own environment ? (container)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#a-create-your-interfaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A. Create your interfaces
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="A. Create your interfaces">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-it-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How it works ?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-create-a-new-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to create a new interface ?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#probesh-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Probe.sh file
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#b-add-mandatory-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B. Add mandatory configuration
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="B. Add mandatory configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#arguments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Arguments
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#environment-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Environment variables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#node-selectors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Node Selectors
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ports" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ports
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#c-create-your-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C. Create your environment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="C. Create your environment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-an-interface-in-the-existing-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Add an interface in the existing Environment
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contributors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#a-create-your-interfaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A. Create your interfaces
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="A. Create your interfaces">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-it-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How it works ?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-create-a-new-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to create a new interface ?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#probesh-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Probe.sh file
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#b-add-mandatory-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B. Add mandatory configuration
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="B. Add mandatory configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#arguments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Arguments
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#environment-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Environment variables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#node-selectors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Node Selectors
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ports" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ports
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#c-create-your-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C. Create your environment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="C. Create your environment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-an-interface-in-the-existing-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Add an interface in the existing Environment
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="how-to-build-my-own-environment-container">How to build my own environment ? (container)</h1>
+<p>If you want your users to use a custom environment of your own, here a step-by-step guide to this.
+The first version is container only, but dedicated VM guide will be added to the Odin core later in the year.</p>
+<h2 id="a-create-your-interfaces">A. Create your interfaces</h2>
+<p>An <code>environment</code> in the Odin context is a group of <code>interfaces</code>. 
+Each interface is a container, and you can put whatever you want in it.</p>
+<h3 id="how-it-works">How it works ?</h3>
+<p>On the Caelus Playground, you will be able to display every port exposed of your containers.</p>
+<p>Here is the structure of a port :</p>
+<pre><code class="language-json">{
+    &quot;port&quot;: 3000,
+    &quot;label&quot;: &quot;internal_label&quot;,
+    &quot;display_name&quot;: &quot;name_displayed_on_playground&quot;,
+    &quot;icon&quot;: &quot;xxxxxxxx&quot;, # see the Images part
+    &quot;PortType&quot;: {
+        &quot;label&quot;: &quot;strip_path&quot;
+    }
+
+}
+</code></pre>
+<p>So when you add a new port to an interface in Odin, you can configure it from API in order to expose it through Kong.
+That is why, the PortType.label can take those values :
+- <code>strip_path</code> : the ingress cut the path for the container internal ingress controller (<em>Request: GET /api/users → Upstream receives: GET /users</em>). 
+- <code>no_strip_path</code> : the ingress does not cut the path for the container internal ingress controller (<em>Request: GET /api/users → Upstream receives: GET /api/users</em>). 
+- <code>none</code> : using this value, the port will not be exposed.</p>
+<h3 id="how-to-create-a-new-interface">How to create a new interface ?</h3>
+<p>So here is the variables to put for creation : 
+- <code>label</code> : this is the label that will be used for identify the interface.<br />
+- <code>registry_link</code> : this is your actual docker image address. You will need to add it in a registry where you set the credentials on Datacenter.<br />
+- <code>exec_command</code> : this is the execution command that / script that will be used for executing the <code>service_command</code>. (strongly recommend to manage your services using <em>supervisord</em>).<br />
+- <code>service_command</code> : this is the script executed by the exec_command. (can be '').<br />
+- <code>need_compute_gpu</code> : does your container need a GPU for computing purpose. Used for node selection. You must have configure the Kubernetes node for it.
+- <code>need_graphical_rendering_gpu</code> : does your container need a GPU for graphical purpose (graphical application). You must have configure the Kubernetes node for it.<br />
+- <code>cpu_request</code> : Kubernetes CPU request variable (check Kubernetes documentation).<br />
+- <code>cpu_limit</code> : Kubernetes CPU limit variable (check Kubernetes documentation).<br />
+- <code>ram_request</code> : Kubernetes RAM request variable (check Kubernetes documentation).<br />
+- <code>ram_limit</code> : Kubernetes RAM limit variable (check Kubernetes documentation). <br />
+- <code>readiness_probe_initial_delay</code> : how many seconds before first execution of the probe.sh file. The script must return 0 for the network to come into the container.<br />
+- <code>readiness_probe_period</code> : how many seconds between two execution.  <br />
+- <code>liveness_probe_initial_delay</code> : how many seconds before first execution of the probe.sh file (to check if the services are still running).<br />
+- <code>liveness_probe_period</code> : how many seconds between two execution.<br />
+- <code>privileged</code> : (boolean) disabled.
+- <code>egress_bandwidth</code>: bandwidth of egress network that enters into the container.
+- <code>ingress_bandwidth</code>: bandwidth of ingress network that goes out into the container.
+- <code>id_type</code> : this is the type of interface (docker / kubernetes / etc).  </p>
+<pre><code class="language-shell">export $MY_ADMIN_TOKEN
+curl --request POST \
+  --url https://test/interface \
+  --header 'Authorization: Bearer $MY_ADMIN_TOKEN' \
+  --header 'content-type: application/x-www-form-urlencoded' \
+  --data 'label=Label of the new interface' \
+  --data registry_link=your.container.com/image:tag \
+  --data exec_command=/bin/sh \
+  --data service_command=/init.sh \
+  --data id_type=1 \
+  --data need_compute_gpu=false \
+  --data need_graphical_rendering_gpu=false \
+  --data cpu_request=100m \
+  --data ram_request=500Mi \
+  --data cpu_limit=2 \
+  --data ram_limit=1Gi \
+  --data readiness_probe_initial_delay=11 \
+  --data readiness_probe_period=11 \
+  --data liveness_probe_initial_delay=11 \
+  --data liveness_probe_period=11 \
+  --data privileged=false \
+  --data egress_bandwidth=1G \
+  --data ingress_bandwidth=1G
+</code></pre>
+<h3 id="probesh-file"><code>Probe.sh</code> file</h3>
+<p>You have to create a shell script in <code>/var/probe.sh</code> that will check if all the services in the container are running as expected.</p>
+<p>Here is an example that checks if the SSH is running : </p>
+<pre><code class="language-bash">#!/bin/bash
+
+# Check if any active connection exists on port 3000
+check_ssh() {
+  ps aux | grep '[s]shd' | grep -v 'grep' &gt; /dev/null
+  return $?
+}
+
+# Run the checks
+check_ssh
+ssh_status=$?
+
+# Both ports must be active
+if [ $ssh_status -eq 0 ]; then
+  echo &quot;Readiness probe successful: SSH is running&quot;
+  exit 0
+else
+  echo &quot;Readiness probe failed: SSH is not running.&quot;
+  exit 1
+fi
+</code></pre>
+<h2 id="b-add-mandatory-configuration">B. Add mandatory configuration</h2>
+<p>There are some configurations that you will probably need to set for your services to work as you want.</p>
+<h3 id="arguments">Arguments</h3>
+<p>Arguments are putted at the end of the execution command :</p>
+<pre><code class="language-shell">exec_command service_command --arg1 -arg2
+</code></pre>
+<p>So you will need to put the array like this : </p>
+<pre><code class="language-json">{
+    ...
+    &quot;args&quot;: [&quot;--arg1&quot;, &quot;--arg2&quot;]
+    ...
+}
+</code></pre>
+<h3 id="environment-variables">Environment variables</h3>
+<p>These are the env variables that will be set into the container system.</p>
+<pre><code class="language-json">{
+    ...
+    &quot;envs&quot;: [ 
+        { &quot;id_variable_environment&quot;: 2 }, 
+        { &quot;key&quot;: &quot;USER&quot;, &quot;value&quot;: &quot;ulfi&quot; }
+    ]
+    ...
+}
+</code></pre>
+<p>If you want to add a pre existing variable into the interface you can use : </p>
+<pre><code class="language-json">{ &quot;id_variable_environment&quot;: 2 }
+</code></pre>
+<p>Else, just create one new : </p>
+<pre><code class="language-json">{ &quot;key&quot;: &quot;USER&quot;, &quot;value&quot;: &quot;ulfi&quot; }
+</code></pre>
+<h3 id="node-selectors">Node Selectors</h3>
+<p>This one is Kubernetes only. You will have to add label on the node to be able to receive the application. (This way you can select which k8s node receive the application).</p>
+<p>Here is how to set a label on a node :</p>
+<pre><code class="language-shell">kubectl label node xxxxxx node-role.kubernetes.io/odn-default
+</code></pre>
+<p>Here are the default available node selectors :
+- <code>node-role.kubernetes.io/odn-default</code>. 
+- <code>node-role.kubernetes.io/odn-gpu-gr</code> : for graphical gpu purpose.<br />
+- <code>node-role.kubernetes.io/odn-compute</code> : for compute gpu purpose.<br />
+- <code>node-role.kubernetes.io/odn-storage</code> : for storage.<br />
+- <code>node-role.kubernetes.io/odn-monitoring</code> : for monitoring.  </p>
+<p>You can also add your own in the database.</p>
+<p>Here is how to add it on an interface :</p>
+<pre><code class="language-json">{
+    ...
+    &quot;node_selectors&quot;: [1,2] 
+    ...
+}
+</code></pre>
+<h3 id="ports">Ports</h3>
+<p>Ports to expose (even internally) on the container :</p>
+<pre><code class="language-json">{
+    ...
+    &quot;ports&quot;: [
+        {
+            &quot;port&quot;: 3000,
+            &quot;id_port_type&quot;: 1,
+            &quot;icon&quot;: &quot;xxxxxx&quot;,
+            &quot;label&quot;: &quot;label of the port&quot;,
+            &quot;display_name&quot;: &quot;displayed name on playgraound&quot;
+        }
+    ] 
+    ...
+}
+</code></pre>
+<h2 id="c-create-your-environment">C. Create your environment</h2>
+<p>Now that all your interfaces are correctly created, you have to configure the environment that will connect the all.</p>
+<pre><code class="language-shell">export $MY_ADMIN_TOKEN
+curl --request POST \
+  --url https://test/environment \
+  --header 'Authorization: Bearer $MY_ADMIN_TOKEN' \
+  --header 'content-type: application/x-www-form-urlencoded' \
+  --data label=Label \
+  --data icon=xxxxxx
+</code></pre>
+<p>The <code>label</code> is the final name of your environment.
+And the <code>icon</code> is the icon that will be displayed on the dashboard. (look at images documentation)</p>
+<h3 id="add-an-interface-in-the-existing-environment">Add an interface in the existing Environment</h3>
+<p>When the interface and the environment are created, you just have to add the interface into the environment.</p>
+<pre><code class="language-shell">export $MY_ADMIN_TOKEN
+curl --request POST \
+  --url https://test/{id_environment}/interface \
+  --header 'Authorization: Bearer $MY_ADMIN_TOKEN' \
+  --header 'content-type: application/x-www-form-urlencoded' \
+  --data id_interface=1 \
+  --data label=Label 
+</code></pre>
+<p>You can also use targeting system for ports.
+For example, if you have two interfaces : <code>terminal</code> and <code>debian</code>.<br />
+You can connect ssh to debian by setting the label to label : <code>ssh-debian</code>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 <a href="mailto:benlef99@gmail.com">Benoit LEFEBVRE</a> & the previous contributors.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
